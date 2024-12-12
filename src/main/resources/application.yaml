@@ -1,0 +1,11 @@
+spring:
+  name: account-management-service
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${POSTGRES_PATH:jdbc:postgresql://localhost:5432/accounts-db}
+    username: ${POSTGRES_USERNAME:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
