@@ -12,7 +12,7 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = AllowedSourceConstrainValidator.class)
 public @interface AllowedSources {
 
-    String message() default "Wrong X-Source value";
+    String message() default "Wrong 'X-Source' header value";
 
     Class<?>[] groups() default {};
 

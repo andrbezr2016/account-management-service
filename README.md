@@ -13,7 +13,8 @@ You can:
 #### To run:
 
 1. docker-compose up -d
-2. run account-management-service
+2. set POSTGRES_PATH as jdbc:postgresql://localhost:5555/accounts-db
+3. run account-management-service
 
 #### To change default sources:
 
