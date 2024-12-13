@@ -1,4 +1,4 @@
-package com.andrbezr2016.account.management.config;
+package com.andrbezr2016.account.management.mock;
 
 import com.andrbezr2016.account.management.service.AccountService;
 import org.springframework.context.annotation.Bean;
