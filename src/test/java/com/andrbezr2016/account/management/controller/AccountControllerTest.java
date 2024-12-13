@@ -259,7 +259,7 @@ public class AccountControllerTest {
 
         doReturn(responseAccountDtoList).when(accountService).getAccountsByFilter(eq(accountFilter));
 
-        mvc.perform(post(GET_ACCOUNTS_PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(accountFilter)))
+        mvc.perform(get(GET_ACCOUNTS_PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(accountFilter)))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(responseAccountDtoList)));
     }
@@ -270,7 +270,7 @@ public class AccountControllerTest {
 
         doReturn(Collections.emptyList()).when(accountService).getAccountsByFilter(eq(accountFilter));
 
-        mvc.perform(post(GET_ACCOUNTS_PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(accountFilter)))
+        mvc.perform(get(GET_ACCOUNTS_PATH).contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(accountFilter)))
                 .andExpect(status().isBadRequest());
     }
 }

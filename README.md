@@ -14,7 +14,6 @@ You can:
 
 1. docker-compose up -d
 2. run account-management-service
-3. http://localhost:8080/swagger-ui.html
 
 #### To change default sources:
 
