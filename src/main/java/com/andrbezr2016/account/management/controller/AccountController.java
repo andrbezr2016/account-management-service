@@ -31,7 +31,6 @@ public class AccountController {
 
     @PostMapping("/account")
     public ResponseEntity<?> createAccount(@AllowedSources @RequestHeader(name = "X-Source") String source, @Valid @RequestBody RequestAccountDto requestAccountDto, Errors errors) {
-        log.info("Start creating new account");
         accountValidator.validate(source, requestAccountDto, errors);
         if (errors.hasErrors()) {
             String message = errors.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining(", "));
