@@ -8,6 +8,7 @@ import com.andrbezr2016.account.management.validation.AccountValidator;
 import com.andrbezr2016.account.management.validation.AllowedSources;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+@Slf4j
 @RequiredArgsConstructor
 @Validated
 @RequestMapping("/api")
@@ -31,19 +33,25 @@ public class AccountController {
     public ResponseEntity<?> createAccount(@AllowedSources @RequestHeader(name = "X-Source") String source, @Valid @RequestBody RequestAccountDto requestAccountDto, Errors errors) {
         accountValidator.validate(source, requestAccountDto, errors);
         if (errors.hasErrors()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining(", ")));
+            String message = errors.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining(", "));
+            log.error(message);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(message);
         }
+        log.info("Start creating new account");
         ResponseAccountDto responseAccountDto = accountService.createAccount(requestAccountDto);
+        log.info("New account was created");
         return ResponseEntity.status(HttpStatus.CREATED).body(responseAccountDto);
     }
 
     @GetMapping("/account/{id}")
     public ResponseAccountDto getAccountById(@PathVariable("id") Long id) {
+        log.info("Get account by id");
         return accountService.getAccountById(id);
     }
 
     @PostMapping("/accounts")
     public Collection<ResponseAccountDto> getAccountsByFilter(@Valid @RequestBody AccountFilter accountFilter) {
+        log.info("Get accounts by filter");
         return accountService.getAccountsByFilter(accountFilter);
     }
 }
