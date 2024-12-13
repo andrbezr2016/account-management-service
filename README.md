@@ -1,11 +1,20 @@
 ## Account-Management-Service
 
+Service for managing user accounts.
+
+You can:
+
+1. Create user account.
+2. Get user account by id.
+3. Get user accounts by filter.
+
 ### Quick Guide
 
 #### To run:
 
 1. docker-compose up -d
 2. run account-management-service
+3. http://localhost:8080/swagger-ui.html
 
 #### To change default sources:
 

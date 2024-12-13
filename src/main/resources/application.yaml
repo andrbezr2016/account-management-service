@@ -9,6 +9,9 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: validate
+springdoc:
+  swagger-ui:
+    path: swagger-ui.html
 account-management:
   validation:
     sources: ${SOURCES:mail=firstName,email;mobile=phoneNumber;bank=bankId,lastName,firstName,middleName,birthDate,passportNumber;gosuslugi=bankId,lastName,firstName,middleName,birthDate,birthPlace,passportNumber,phoneNumber,registrationAddress}
