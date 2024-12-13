@@ -26,11 +26,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest(properties = {
-        "account-management.validation.sources=mail=firstName,email;mobile=phoneNumber;bank=bankId,lastName,firstName,middleName,birthDate,passportNumber"
-})
+@SpringBootTest()
 @AutoConfigureMockMvc
-@ActiveProfiles(profiles = {"mocks"})
+@ActiveProfiles(profiles = {"accountServiceMock"})
 public class AccountControllerTest {
 
     private static final String CREATE_ACCOUNT_PATH = "/api/account";

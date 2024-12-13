@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    url: ${POSTGRES_PATH:jdbc:tc:postgresql:15://localhost:5555/accounts-db}
+account-management:
+  validation:
+    sources: ${SOURCES:mail=firstName,email;mobile=phoneNumber;bank=bankId,lastName,firstName,middleName,birthDate,passportNumber}

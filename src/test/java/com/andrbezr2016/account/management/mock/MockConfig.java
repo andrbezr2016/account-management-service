@@ -9,12 +9,12 @@ import org.springframework.context.annotation.Profile;
 import static org.mockito.Mockito.mock;
 
 @Configuration
-@Profile("mocks")
 public class MockConfig {
 
     @Bean
     @Primary
-    public AccountService AccountServiceMock() {
+    @Profile("accountServiceMock")
+    public AccountService accountServiceMock() {
         return mock(AccountService.class);
     }
 }

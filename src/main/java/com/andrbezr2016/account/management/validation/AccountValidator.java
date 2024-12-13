@@ -16,6 +16,9 @@ public class AccountValidator {
     private final SourcesConfig sourcesConfig;
 
     public void validate(String source, RequestAccountDto requestAccountDto, Errors errors) {
+        if (sourcesConfig.getSources() == null) {
+            return;
+        }
         List<String> fieldsToValid = sourcesConfig.getSources().get(source);
         Field[] declaredFields = requestAccountDto.getClass().getDeclaredFields();
         for (Field field : declaredFields) {
