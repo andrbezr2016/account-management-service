@@ -1,5 +1,6 @@
 package com.andrbezr2016.account.management.controller;
 
+import com.andrbezr2016.account.management.config.SourcesConfig;
 import com.andrbezr2016.account.management.dto.AccountFilter;
 import com.andrbezr2016.account.management.dto.RequestAccountDto;
 import com.andrbezr2016.account.management.dto.ResponseAccountDto;
@@ -17,6 +18,7 @@ import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doReturn;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -24,7 +26,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest
+@SpringBootTest(properties = {
+        "account-management.validation.sources=mail=firstName,email;mobile=phoneNumber;bank=bankId,lastName,firstName,middleName,birthDate,passportNumber"
+})
 @AutoConfigureMockMvc
 @ActiveProfiles(profiles = {"mocks"})
 public class AccountControllerTest {
@@ -39,6 +43,16 @@ public class AccountControllerTest {
     ObjectMapper objectMapper;
     @Autowired
     AccountService accountService;
+    @Autowired
+    SourcesConfig sourcesConfig;
+
+    @Test
+    void checkSources() {
+        assertEquals(3, sourcesConfig.getSources().size());
+        assertEquals(List.of("firstName", "email"), sourcesConfig.getSources().get("mail"));
+        assertEquals(List.of("phoneNumber"), sourcesConfig.getSources().get("mobile"));
+        assertEquals(List.of("bankId", "lastName", "firstName", "middleName", "birthDate", "passportNumber"), sourcesConfig.getSources().get("bank"));
+    }
 
     @Test
     void createAccountTest() throws Exception {

@@ -11,4 +11,4 @@ spring:
       ddl-auto: validate
 account-management:
   validation:
-    sources: { "mail": [ "firstName", "email" ], "mobile": [ "phoneNumber" ], "bank": [ "bankId", "lastName", "firstName", "middleName", "birthDate", "passportNumber" ], "gosuslugi": [ "bankId", "lastName", "firstName", "middleName", "birthDate", "birthPlace", "passportNumber", "phoneNumber", "registrationAddress" ] }
+    sources: ${SOURCES:mail=firstName,email;mobile=phoneNumber;bank=bankId,lastName,firstName,middleName,birthDate,passportNumber;gosuslugi=bankId,lastName,firstName,middleName,birthDate,birthPlace,passportNumber,phoneNumber,registrationAddress}
