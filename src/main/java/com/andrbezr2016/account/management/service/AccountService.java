@@ -21,8 +21,9 @@ public class AccountService {
     private final AccountRepository accountRepository;
     private final AccountMapper accountMapper;
 
-    public void createAccount(RequestAccountDto requestAccountDto) {
-        accountRepository.save(accountMapper.toEntity(requestAccountDto));
+    public ResponseAccountDto createAccount(RequestAccountDto requestAccountDto) {
+        Account account = accountRepository.save(accountMapper.toEntity(requestAccountDto));
+        return accountMapper.toDto(account);
     }
 
     public ResponseAccountDto getAccountById(Long id) {
@@ -38,20 +39,20 @@ public class AccountService {
     private static Specification<Account> filter(AccountFilter accountFilter) {
         List<Specification<Account>> specificationList = new ArrayList<>();
         if (accountFilter.getLastName() != null) {
-            specificationList.add((accountRoot, cq, cb) -> cb.equal(accountRoot.get("lastName"), accountFilter.getLastName()));
+            specificationList.add((accountRoot, query, builder) -> builder.equal(accountRoot.get("lastName"), accountFilter.getLastName()));
         }
         if (accountFilter.getFirstName() != null) {
-            specificationList.add((accountRoot, cq, cb) -> cb.equal(accountRoot.get("firstName"), accountFilter.getFirstName()));
+            specificationList.add((accountRoot, query, builder) -> builder.equal(accountRoot.get("firstName"), accountFilter.getFirstName()));
         }
         if (accountFilter.getMiddleName() != null) {
-            specificationList.add((accountRoot, cq, cb) -> cb.equal(accountRoot.get("middleName"), accountFilter.getMiddleName()));
+            specificationList.add((accountRoot, query, builder) -> builder.equal(accountRoot.get("middleName"), accountFilter.getMiddleName()));
         }
         if (accountFilter.getPhoneNumber() != null) {
-            specificationList.add((accountRoot, cq, cb) -> cb.equal(accountRoot.get("phoneNumber"), accountFilter.getPhoneNumber()));
+            specificationList.add((accountRoot, query, builder) -> builder.equal(accountRoot.get("phoneNumber"), accountFilter.getPhoneNumber()));
         }
         if (accountFilter.getEmail() != null) {
-            specificationList.add((accountRoot, cq, cb) -> cb.equal(accountRoot.get("email"), accountFilter.getEmail()));
+            specificationList.add((accountRoot, query, builder) -> builder.equal(accountRoot.get("email"), accountFilter.getEmail()));
         }
-        return Specification.allOf(specificationList);
+        return specificationList.isEmpty() ? Specification.where((accountRoot, query, builder) -> builder.or()) : Specification.allOf(specificationList);
     }
 }
