@@ -1,4 +1,8 @@
 package com.andrbezr2016.account.management.repository;
 
-public interface AccountRepository {
+import com.andrbezr2016.account.management.entity.Account;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+public interface AccountRepository extends JpaRepository<Account, Long>, JpaSpecificationExecutor<Account> {
 }

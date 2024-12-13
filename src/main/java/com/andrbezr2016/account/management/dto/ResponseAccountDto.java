@@ -2,17 +2,17 @@ package com.andrbezr2016.account.management.dto;
 
 import lombok.Data;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDate;
 
 @Data
-public class AccountDto {
+public class ResponseAccountDto {
 
     private Long id;
     private Long bankId;
     private String lastName;
     private String firstName;
     private String middleName;
-    private OffsetDateTime birthDate;
+    private LocalDate birthDate;
     private String birthPlace;
     private String passportNumber;
     private String phoneNumber;

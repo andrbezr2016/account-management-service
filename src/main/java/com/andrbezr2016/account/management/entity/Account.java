@@ -1,14 +1,11 @@
 package com.andrbezr2016.account.management.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @Setter
@@ -18,6 +15,7 @@ import java.time.OffsetDateTime;
 public class Account {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
     @Column(name = "bank_id")
@@ -29,7 +27,7 @@ public class Account {
     @Column(name = "middle_name")
     private String middleName;
     @Column(name = "birth_date")
-    private OffsetDateTime birthDate;
+    private LocalDate birthDate;
     @Column(name = "birth_place")
     private String birthPlace;
     @Column(name = "passport_number")
