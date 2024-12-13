@@ -12,7 +12,7 @@ public class AccountFilter {
     private String phoneNumber;
     private String email;
 
-    @AssertTrue(message = "All fields are empty!")
+    @AssertTrue(message = "All fields are empty")
     private boolean isValidAccountFilter() {
         return lastName != null
                 || firstName != null
