@@ -42,7 +42,7 @@ public class AccountController {
         return accountService.getAccountById(id);
     }
 
-    @GetMapping("/accounts")
+    @PostMapping("/accounts")
     public Collection<ResponseAccountDto> getAccountsByFilter(@Valid @RequestBody AccountFilter accountFilter) {
         return accountService.getAccountsByFilter(accountFilter);
     }
