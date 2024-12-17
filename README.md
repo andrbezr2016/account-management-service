@@ -12,8 +12,9 @@ You can:
 
 #### To run:
 
-1. docker-compose up -d
-2. run account-management-service
+1. Execute docker-compose up -d
+2. Run account-management-service
+3. Send requests to API on localhost:8080
 
 #### To change default sources:
 
