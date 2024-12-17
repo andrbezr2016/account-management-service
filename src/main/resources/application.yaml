@@ -9,6 +9,14 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: validate
+management:
+  endpoints:
+    web:
+      exposure:
+        include: 'health,prometheus'
+  endpoint:
+    health:
+      show-details: always
 account-management:
   validation:
     sources: ${SOURCES:mail=firstName,email;mobile=phoneNumber;bank=bankId,lastName,firstName,middleName,birthDate,passportNumber;gosuslugi=bankId,lastName,firstName,middleName,birthDate,birthPlace,passportNumber,phoneNumber,registrationAddress}
