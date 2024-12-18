@@ -7,6 +7,8 @@ import com.andrbezr2016.account.management.entity.Account;
 import com.andrbezr2016.account.management.mapper.AccountMapper;
 import com.andrbezr2016.account.management.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -21,16 +23,19 @@ public class AccountService {
     private final AccountRepository accountRepository;
     private final AccountMapper accountMapper;
 
+    @CacheEvict("accountCache")
     public ResponseAccountDto createAccount(RequestAccountDto requestAccountDto) {
         Account account = accountRepository.save(accountMapper.toEntity(requestAccountDto));
         return accountMapper.toDto(account);
     }
 
+    @Cacheable("accountCache")
     public ResponseAccountDto getAccountById(Long id) {
         Account account = accountRepository.findById(id).orElse(null);
         return accountMapper.toDto(account);
     }
 
+    @Cacheable("accountCache")
     public Collection<ResponseAccountDto> getAccountsByFilter(AccountFilter accountFilter) {
         List<Account> accountList = accountRepository.findAll(filter(accountFilter));
         return accountMapper.toDtoList(accountList);
