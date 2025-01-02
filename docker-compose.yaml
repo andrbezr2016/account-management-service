@@ -49,6 +49,30 @@ services:
       - grafana_data:/var/lib/grafana
     networks:
       - my-network
+  elk:
+    image: sebp/elk:8.15.1
+    container_name: elk
+    ports:
+      - '5601:5601' #kibana
+      - '9200:9200' #elastic
+      - '5044:5044' #logstash
+    volumes:
+      - elk_data:/var/lib/elasticsearch
+    networks:
+      - my-network
+  filebeat:
+    image: elastic/filebeat:8.15.1
+    container_name: filebeat
+    depends_on:
+      - elk
+    command: filebeat -e -strict.perms=false
+    volumes:
+      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - ./certs:/var/certs
+      - ./log:/var/log
+      - filebeat_data:/usr/share/filebeat/data
+    networks:
+      - my-network
 
 volumes:
   postgresql_data:
@@ -58,6 +82,10 @@ volumes:
   grafana_data:
     driver: local
   prometheus_data:
+    driver: local
+  elk_data:
+    driver: local
+  filebeat_data:
     driver: local
 
 networks:
