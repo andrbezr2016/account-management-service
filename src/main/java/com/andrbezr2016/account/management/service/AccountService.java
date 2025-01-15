@@ -23,7 +23,7 @@ public class AccountService {
     private final AccountRepository accountRepository;
     private final AccountMapper accountMapper;
 
-    @CacheEvict("accountCache")
+    @CacheEvict(value = "accountCache", allEntries = true)
     public ResponseAccountDto createAccount(RequestAccountDto requestAccountDto) {
         Account account = accountRepository.save(accountMapper.toEntity(requestAccountDto));
         return accountMapper.toDto(account);
