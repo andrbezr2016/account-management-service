@@ -1,5 +1,6 @@
 package com.andrbezr2016.account.management.controller;
 
+import com.andrbezr2016.account.management.AbstractTest;
 import com.andrbezr2016.account.management.config.SourcesConfig;
 import com.andrbezr2016.account.management.dto.AccountFilter;
 import com.andrbezr2016.account.management.dto.RequestAccountDto;
@@ -26,10 +27,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@SpringBootTest()
+@SpringBootTest
 @AutoConfigureMockMvc
 @ActiveProfiles(profiles = {"accountServiceMock"})
-public class AccountControllerTest {
+public class AccountControllerTest extends AbstractTest {
 
     private static final String CREATE_ACCOUNT_PATH = "/api/account";
     private static final String GET_ACCOUNT_PATH = "/api/account/";

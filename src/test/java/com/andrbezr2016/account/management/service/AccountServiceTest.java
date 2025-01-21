@@ -1,5 +1,6 @@
 package com.andrbezr2016.account.management.service;
 
+import com.andrbezr2016.account.management.AbstractTest;
 import com.andrbezr2016.account.management.dto.AccountFilter;
 import com.andrbezr2016.account.management.dto.RequestAccountDto;
 import com.andrbezr2016.account.management.dto.ResponseAccountDto;
@@ -12,8 +13,8 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest()
-public class AccountServiceTest {
+@SpringBootTest
+public class AccountServiceTest extends AbstractTest {
 
     @Autowired
     AccountService accountService;
